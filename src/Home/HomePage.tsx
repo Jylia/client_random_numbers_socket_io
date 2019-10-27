@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { History } from 'history';
-import { Header, Button, Icon } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import { MobileContext } from '../Layout/MobileContext';
 
 interface IHomePageProps {
