@@ -6,14 +6,19 @@ This is the client app for showing charts with generated random numbers by [serv
 
 The client app has 4 pages:
 - **Home**: hello-page
+
 - **Line Chart**: Chart with the next data:
--- x-axis: time of a received number (look at timestamp payload field)
-- - y-axis: number values
-To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You can continue by clicking on "Start Calculation" again.
+  - - x-axis: time of a received number (look at timestamp payload field)
+  - - y-axis: number values
+
+  To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You   can continue by clicking on "Start Calculation" again.
+  
 - **Bar Chart**: Chart with the next data:
-- - x-axis: range categories (-100 - -80, -80 - -60, -60 - -40 etc)
-- - y-axis: the amount of numbers in each category
-To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You can continue by clicking on "Start Calculation" again.
+  - - x-axis: range categories (-100 - -80, -80 - -60, -60 - -40 etc)
+  - - y-axis: the amount of numbers in each category
+
+  To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You   can continue by clicking on "Start Calculation" again.
+  
 - **Treshold Play**: On this page user can play with threshold
 
 # Project setup
