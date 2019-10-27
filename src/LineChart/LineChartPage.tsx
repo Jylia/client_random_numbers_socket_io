@@ -1,55 +1,94 @@
 import React, { Component } from 'react'
+import openSocket from 'socket.io-client';
 
 import CanvasJSReact from '../assets/canvasjs.react';
-import Layout from '../Layout/Layout';
 import { History } from 'history';
-
-const options = {
-    animationEnabled: true,
-    title:{
-        text: "Monthly Sales - 2017"
-    },
-    axisX: {
-        valueFormatString: "MMM"
-    },
-    axisY: {
-        title: "Sales (in USD)",
-        prefix: "$",
-        includeZero: false
-    },
-    data: [{
-        yValueFormatString: "$#,###",
-        xValueFormatString: "MMMM",
-        type: "spline",
-        dataPoints: [
-            { x: new Date(2017, 0), y: 25060 },
-            { x: new Date(2017, 1), y: 27980 },
-            { x: new Date(2017, 2), y: 42800 },
-            { x: new Date(2017, 3), y: 32400 },
-            { x: new Date(2017, 4), y: 35260 },
-            { x: new Date(2017, 5), y: 33900 },
-            { x: new Date(2017, 6), y: 40000 },
-            { x: new Date(2017, 7), y: 52500 },
-            { x: new Date(2017, 8), y: 32300 },
-            { x: new Date(2017, 9), y: 42000 },
-            { x: new Date(2017, 10), y: 37160 },
-            { x: new Date(2017, 11), y: 38400 }
-        ]
-    }]
-}
+import { Button, Segment } from 'semantic-ui-react';
+import { IChartOptions, ISocketData } from '../shared/ChartOptionInterfaces';
 
 interface ILineChartPageProps {
     history: History;
 }
 
 interface ILineChartPageState {
-
+    chartOptions: IChartOptions;
+    isCalcInProgress: boolean;
 }
 
 class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> {
+    
+    socket = openSocket('http://localhost:3001');
+
+    constructor(props: ILineChartPageProps) {
+        super(props);
+
+        this.state = {
+            chartOptions: {
+                animationEnabled: true,
+                title: {
+                    text: "Random numbers"
+                },
+                axisX: {
+                    valueFormatString: "mm:ss"
+                },
+                axisY: {
+                    title: "Number",
+                    prefix: "",
+                    includeZero: false
+                },
+                data: [{
+                    yValueFormatString: "###",
+                    xValueFormatString: "",
+                    type: "spline",
+                    dataPoints: [],
+                }],
+            },
+            isCalcInProgress: false,
+        }
+    }
+
+    componentWillUnmount() {
+        this.socket.off('data');
+    }
+
+    onCalcButtonClick = () => {
+        this.setState({ isCalcInProgress: true });
+        this.socket.on('data', (data: ISocketData) => {
+            const newOptions: IChartOptions = {...this.state.chartOptions};
+            const newDataPoints = newOptions.data[0].dataPoints;
+            const dataDateTime = new Date(data.timestamp);
+            const label = `${dataDateTime.getMinutes()}:${dataDateTime.getSeconds()}`;
+
+            newDataPoints.push({
+                x: dataDateTime,
+                y: data.value,
+                label: label,
+            });
+            newOptions.data[0].dataPoints = newDataPoints;
+            this.setState({
+                chartOptions: newOptions
+            });
+        });
+    }
+    
+    onCalcStopButtonClick = () => {
+        this.socket.off('data');
+        this.setState({ isCalcInProgress: false });
+    }
+
     render () {
         return (
-            <CanvasJSReact.CanvasJSChart options = {options} />
+            <React.Fragment>
+                <CanvasJSReact.CanvasJSChart options = {this.state.chartOptions} />
+                <Segment basic>
+                    <Button
+                        color={this.state.isCalcInProgress ? 'red' : 'teal'}
+                        onClick={this.state.isCalcInProgress ? this.onCalcStopButtonClick : this.onCalcButtonClick}
+                    >
+                        {this.state.isCalcInProgress ? 'Stop Calculation' : 'Start Calculation'}
+                    </Button>
+                </Segment>
+            </React.Fragment>
         );
     }
 }
