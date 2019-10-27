@@ -16,10 +16,11 @@ export interface IChartOptions<T> {
         text: string,
     },
     axisX: {
+        title?: string,
         valueFormatString: string,
     },
     axisY: {
-        title: string,
+        title?: string,
         prefix: string,
         includeZero: boolean
     },

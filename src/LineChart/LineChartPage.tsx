@@ -30,6 +30,7 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
                     text: "Random numbers"
                 },
                 axisX: {
+                    title: "Time",
                     valueFormatString: "mm:ss"
                 },
                 axisY: {

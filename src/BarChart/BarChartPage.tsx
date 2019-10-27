@@ -39,10 +39,11 @@ class BarChartPage extends Component<IBarChartPageProps, IBarChartPageState> {
                     text: "Random numbers"
                 },
                 axisX: {
+                    title: "Ranges",
                     valueFormatString: "###"
                 },
                 axisY: {
-                    title: "Number",
+                    title: "Count in range",
                     prefix: "",
                     includeZero: false
                 },
