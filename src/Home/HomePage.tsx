@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Layout from '../Layout/Layout';
 import { History } from 'history';
 import { Header, Button, Icon } from 'semantic-ui-react';
 import { MobileContext } from '../Layout/MobileContext';
