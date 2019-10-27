@@ -7,7 +7,7 @@ This is the client app for showing charts with generated random numbers by [serv
 The client app has 4 pages:
 - **Home**: hello-page
 - **Line Chart**: Chart with the next data:
-- - x-axis: time of a received number (look at timestamp payload field)
+-- x-axis: time of a received number (look at timestamp payload field)
 - - y-axis: number values
 To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You can continue by clicking on "Start Calculation" again.
 - **Bar Chart**: Chart with the next data:
