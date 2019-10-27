@@ -7,6 +7,7 @@ import HomePage from './Home/HomePage';
 import Layout from './Layout/Layout';
 import { UrlConstants } from './constants/UrlConstants';
 import BarChartPage from './BarChart/BarChartPage';
+import TresholdPage from './Treshold/TresholdPage';
 
 const App: React.FC = () => {
   	return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 						<Route exact={true} path={UrlConstants.home} component={HomePage} />
 						<Route exact={true} path={UrlConstants.lineChart} component={LineChartPage} />
 						<Route exact={true} path={UrlConstants.barChart} component={BarChartPage} />
+						<Route exact={true} path={UrlConstants.tresholdPlay} component={TresholdPage} />
 					</Switch>
 				</Router>
 			</Layout>
