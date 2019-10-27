@@ -15,6 +15,7 @@ const App: React.FC = () => {
 				<Router history={history}>
 					<Switch>
 						<Route exact={true} path='/' component={HomePage} />
+						<Route exact={true} path="/line-chart" component={LineChartPage} />
 					</Switch>
 				</Router>
 			</Layout>
