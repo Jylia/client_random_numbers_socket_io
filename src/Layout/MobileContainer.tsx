@@ -9,8 +9,12 @@ import {
 } from 'semantic-ui-react';
 import Heading from './Heading';
 import MenuItems from './MenuItems';
+import { MenuItemsEnum } from '../enums/MenuItems';
 
-interface IMobileContainerProps {}
+interface IMobileContainerProps {
+    activeItem: MenuItemsEnum;
+    setActiveItem: (activeItem: MenuItemsEnum) => void;
+}
 
 interface IMobileContainerState {
     isSidebarOpened: boolean;
@@ -46,7 +50,10 @@ class MobileContainer extends Component<IMobileContainerProps, IMobileContainerS
                     vertical
                     visible={isSidebarOpened}
                 >
-                    <MenuItems />
+                    <MenuItems
+                        setActiveItem={this.props.setActiveItem}
+                        activeItem={this.props.activeItem}
+                    />
                 </Sidebar>
 
                 <Sidebar.Pusher dimmed={isSidebarOpened}>
@@ -56,19 +63,20 @@ class MobileContainer extends Component<IMobileContainerProps, IMobileContainerS
                         style={{ minHeight: 350, padding: '1em 0em' }}
                         vertical
                     >
-                    <Container>
-                        <Menu inverted pointing secondary size='large'>
-                            <Menu.Item onClick={this.handleToggle}>
-                            <Icon name='sidebar' />
-                            </Menu.Item>
-                        </Menu>
-                    </Container>
-                    <Heading isMobile={true} />
+                        <Container>
+                            <Menu inverted pointing secondary size='large'>
+                                <Menu.Item onClick={this.handleToggle}>
+                                <Icon name='sidebar' />
+                                </Menu.Item>
+                            </Menu>
+                        </Container>
+                        <Heading isMobile={true}  children={this.props.children} />
                     </Segment>
                 </Sidebar.Pusher>
             </Responsive>
         )
     }
 }
+
 
 export default MobileContainer;

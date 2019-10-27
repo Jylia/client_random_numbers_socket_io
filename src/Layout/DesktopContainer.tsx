@@ -8,8 +8,12 @@ import {
 } from 'semantic-ui-react';
 import Heading from './Heading';
 import MenuItems from './MenuItems';
+import { MenuItemsEnum } from '../enums/MenuItems';
 
-interface IDesktopContainerProps {}
+interface IDesktopContainerProps {
+    activeItem: MenuItemsEnum;
+    setActiveItem: (activeItem: MenuItemsEnum) => void;
+}
 interface IDesktopContainerState {
     isFixed: boolean;
 }
@@ -51,15 +55,19 @@ class DesktopContainer extends Component<IDesktopContainerProps, IDesktopContain
                             size='large'
                         >
                             <Container>
-                                <MenuItems />
+                                <MenuItems
+                                    setActiveItem={this.props.setActiveItem}
+                                    activeItem={this.props.activeItem}
+                                />
                             </Container>
                         </Menu>
-                        <Heading isMobile={false} />
+                        <Heading isMobile={false} children={this.props.children} />
                     </Segment>
                 </Visibility>
             </Responsive>
         )
     }
 }
+
 
 export default DesktopContainer;

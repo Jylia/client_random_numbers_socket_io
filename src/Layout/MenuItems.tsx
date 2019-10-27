@@ -2,16 +2,53 @@ import React, { Component } from 'react'
 import {
     Menu,
 } from 'semantic-ui-react';
+import { MenuItemsEnum } from '../enums/MenuItems';
 
-class MenuItems extends Component {
+interface IMenuItemsProps {
+    activeItem: MenuItemsEnum;
+    setActiveItem: (activeItem: MenuItemsEnum) => void;
+}
+
+interface IMenuItemState {
+
+}
+
+const menuItems = [
+    {
+        name: 'Home',
+        type: MenuItemsEnum.Home,
+    },
+    {
+        name: 'Line Chart',
+        type: MenuItemsEnum.LineChart,
+    },
+    {
+        name: 'Bar Chart',
+        type: MenuItemsEnum.BarChart,
+    },
+    {
+        name: 'Threshold play',
+        type: MenuItemsEnum.TresholdPlay,
+    },
+];
+
+class MenuItems extends Component<IMenuItemsProps, IMenuItemState> {
+
+    onMenuItemClick = (menuItem: MenuItemsEnum) => {
+        this.props.setActiveItem(menuItem);
+    }
 
     render() {
         return (
             <React.Fragment>
-                <Menu.Item as='a' active>Home</Menu.Item>
-                <Menu.Item as='a'>Line Chart</Menu.Item>
-                <Menu.Item as='a'>Bar Chart</Menu.Item>
-                <Menu.Item as='a'>Threshold play</Menu.Item>
+                { menuItems.map(item => (
+                    <Menu.Item
+                        key={item.type}
+                        as='a'
+                        active={this.props.activeItem === item.type}
+                        onClick={() => this.onMenuItemClick(item.type)}
+                    >{item.name}</Menu.Item>
+                )) }
             </React.Fragment>
         )
     }
