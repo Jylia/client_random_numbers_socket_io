@@ -1,3 +1,23 @@
+# Project description
+
+This is the client app for showing charts with generated random numbers by [server](https://github.com/antonsapyanov/react-test-task).
+
+# App content
+
+The client app has 4 pages:
+- **Home**: hello-page
+- **Line Chart**: Chart with the next data:
+- - x-axis: time of a received number (look at timestamp payload field)
+- - y-axis: number values
+To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You can continue by clicking on "Start Calculation" again.
+- **Bar Chart**: Chart with the next data:
+- - x-axis: range categories (-100 - -80, -80 - -60, -60 - -40 etc)
+- - y-axis: the amount of numbers in each category
+To start numbers generating - please, click on "Start Calculation" button. To pause this - on button "Stop Calculation". You can continue by clicking on "Start Calculation" again.
+- **Treshold Play**: On this page user can play with threshold
+
+# Project setup
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -37,8 +57,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
