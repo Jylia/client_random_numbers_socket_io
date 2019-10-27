@@ -18,7 +18,7 @@ interface ILineChartPageState {
 
 class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> {
     
-    socket = openSocket('http://localhost:3001');
+    socket?: SocketIOClient.Socket;
 
     constructor(props: ILineChartPageProps) {
         super(props);
@@ -50,11 +50,13 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
     }
 
     componentWillUnmount() {
-        this.socket.off('data');
+        if (this.socket) this.socket.disconnect();
     }
 
     onCalcButtonClick = () => {
         this.setState({ isCalcInProgress: true });
+
+        this.socket = openSocket('http://localhost:3001');
         this.socket.on('data', (data: ISocketData) => {
             const newOptions: IChartOptions<LineDataPoint> = {...this.state.chartOptions};
             const newDataPoints = newOptions.data[0].dataPoints;
@@ -74,7 +76,7 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
     }
     
     onCalcStopButtonClick = () => {
-        this.socket.off('data');
+        if (this.socket) this.socket.disconnect();
         this.setState({ isCalcInProgress: false });
     }
 

@@ -18,7 +18,7 @@ interface IBarChartPageState {
 
 class BarChartPage extends Component<IBarChartPageProps, IBarChartPageState> {
     
-    socket = openSocket('http://localhost:3001');
+    socket?: SocketIOClient.Socket;
     ranges: Array<Array<number>>;
 
     constructor(props: IBarChartPageProps) {
@@ -59,13 +59,15 @@ class BarChartPage extends Component<IBarChartPageProps, IBarChartPageState> {
     }
 
     componentWillUnmount() {
-        this.socket.off('data');
+        if (this.socket) this.socket.disconnect();
     }
 
     onCalcButtonClick = () => {
         const dataValues: Array<number> = [];
 
         this.setState({ isCalcInProgress: true });
+
+        this.socket = openSocket('http://localhost:3001');
         this.socket.on('data', (data: ISocketData) => {
             const newOptions: IChartOptions<BarDataPoint> = {...this.state.chartOptions};
             const currentRandomNumber = data.value;
@@ -94,8 +96,8 @@ class BarChartPage extends Component<IBarChartPageProps, IBarChartPageState> {
     }
     
     onCalcStopButtonClick = () => {
-        this.socket.off('data');
         this.setState({ isCalcInProgress: false });
+        if (this.socket) this.socket.disconnect();
     }
 
     render () {
