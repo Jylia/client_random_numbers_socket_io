@@ -38,10 +38,6 @@ class HomePage extends React.Component<IHomePageProps, IHomePageState> {
                                 marginTop: isMobile ? '0.5em' : '1.5em',
                             }}
                         />
-                        <Button primary size='huge'>
-                            Get Started
-                            <Icon name='arrow right' />
-                        </Button>
                     </React.Fragment>
                 )}
             </MobileContext.Consumer>
