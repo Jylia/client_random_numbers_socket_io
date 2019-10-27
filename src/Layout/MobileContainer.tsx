@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react';
 import Heading from './Heading';
 import MenuItems from './MenuItems';
+import { MobileContext } from './MobileContext';
 import { MenuItemsEnum } from '../enums/MenuItems';
 
 interface IMobileContainerProps {
@@ -78,5 +79,6 @@ class MobileContainer extends Component<IMobileContainerProps, IMobileContainerS
     }
 }
 
+MobileContainer.contextType = MobileContext;
 
 export default MobileContainer;

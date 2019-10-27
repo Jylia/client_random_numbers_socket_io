@@ -8,6 +8,7 @@ import {
 } from 'semantic-ui-react';
 import Heading from './Heading';
 import MenuItems from './MenuItems';
+import { MobileContext } from './MobileContext';
 import { MenuItemsEnum } from '../enums/MenuItems';
 
 interface IDesktopContainerProps {
@@ -69,5 +70,6 @@ class DesktopContainer extends Component<IDesktopContainerProps, IDesktopContain
     }
 }
 
+DesktopContainer.contextType = MobileContext;
 
 export default DesktopContainer;
