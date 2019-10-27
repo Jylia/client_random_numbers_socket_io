@@ -3,20 +3,14 @@ export interface ISocketData {
     timestamp: number,
 }
 
-interface IDataPoint {
-    x: Date,
-    y: number,
-    label: string,
-}
-
-interface IChartDataItem {
+interface IChartDataItem<T> {
     yValueFormatString: string,
     xValueFormatString: string,
     type: string,
-    dataPoints: Array<IDataPoint>
+    dataPoints: Array<T>
 }
 
-export interface IChartOptions {
+export interface IChartOptions<T> {
     animationEnabled: boolean,
     title: {
         text: string,
@@ -29,5 +23,5 @@ export interface IChartOptions {
         prefix: string,
         includeZero: boolean
     },
-    data: Array<IChartDataItem>,
+    data: Array<IChartDataItem<T>>,
 }

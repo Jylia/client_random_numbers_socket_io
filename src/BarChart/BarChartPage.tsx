@@ -5,23 +5,32 @@ import CanvasJSReact from '../assets/canvasjs.react';
 import { History } from 'history';
 import { Button, Segment } from 'semantic-ui-react';
 import { IChartOptions, ISocketData } from '../shared/ChartOptionInterfaces';
-import { LineDataPoint } from '../shared/ChartOptionTypes';
+import { BarDataPoint } from '../shared/ChartOptionTypes';
 
-interface ILineChartPageProps {
+interface IBarChartPageProps {
     history: History;
 }
 
-interface ILineChartPageState {
-    chartOptions: IChartOptions<LineDataPoint>;
+interface IBarChartPageState {
+    chartOptions: IChartOptions<BarDataPoint>;
     isCalcInProgress: boolean;
 }
 
-class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> {
+class BarChartPage extends Component<IBarChartPageProps, IBarChartPageState> {
     
     socket = openSocket('http://localhost:3001');
+    ranges: Array<Array<number>>;
 
-    constructor(props: ILineChartPageProps) {
+    constructor(props: IBarChartPageProps) {
         super(props);
+
+        const minDataValue = -100;
+        const maxDataValue = 100;
+
+        this.ranges = [[minDataValue, minDataValue + 20, 0]];
+        for (let index = minDataValue + 20; index < maxDataValue; index += 20) {
+            this.ranges.push([index, index + 20, 0]);
+        }
 
         this.state = {
             chartOptions: {
@@ -30,7 +39,7 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
                     text: "Random numbers"
                 },
                 axisX: {
-                    valueFormatString: "mm:ss"
+                    valueFormatString: "###"
                 },
                 axisY: {
                     title: "Number",
@@ -40,7 +49,7 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
                 data: [{
                     yValueFormatString: "###",
                     xValueFormatString: "",
-                    type: "spline",
+                    type: "column",
                     dataPoints: [],
                 }],
             },
@@ -53,18 +62,29 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
     }
 
     onCalcButtonClick = () => {
+        const dataValues: Array<number> = [];
+
         this.setState({ isCalcInProgress: true });
         this.socket.on('data', (data: ISocketData) => {
-            const newOptions: IChartOptions<LineDataPoint> = {...this.state.chartOptions};
-            const newDataPoints = newOptions.data[0].dataPoints;
-            const dataDateTime = new Date(data.timestamp);
-            const label = `${dataDateTime.getMinutes()}:${dataDateTime.getSeconds()}`;
+            const newOptions: IChartOptions<BarDataPoint> = {...this.state.chartOptions};
+            const currentRandomNumber = data.value;
+            const newDataPoints: Array<BarDataPoint> = [];
 
-            newDataPoints.push({
-                x: dataDateTime,
-                y: data.value,
-                label: label,
+            dataValues.push(currentRandomNumber);
+            this.ranges.forEach((range, index) => {
+                if (currentRandomNumber > range[0] && currentRandomNumber <= range[1]) {
+                    range[2] += 1;
+                }
+
+                newDataPoints.push(
+                    {
+                        x: index,
+                        y: range[2],
+                        label: `${range[0]}-${range[1]}`,
+                    }
+                )
             });
+            
             newOptions.data[0].dataPoints = newDataPoints;
             this.setState({
                 chartOptions: newOptions
@@ -94,4 +114,4 @@ class LineChartPage extends Component<ILineChartPageProps, ILineChartPageState> 
     }
 }
 
-export default LineChartPage
+export default BarChartPage
