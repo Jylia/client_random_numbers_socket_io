@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <h1
+    className="ui inverted header"
+    style={
+      Object {
+        "fontSize": "4em",
+        "fontWeight": "normal",
+        "marginBottom": 0,
+        "marginTop": "3em",
+      }
+    }
+  >
+    Random number charts
+  </h1>,
+  <h2
+    className="ui inverted header"
+    style={
+      Object {
+        "fontSize": "1.7em",
+        "fontWeight": "normal",
+        "marginTop": "1.5em",
+      }
+    }
+  >
+    Look at changes in real-time
+  </h2>,
+]
+`;

@@ -8,11 +8,14 @@
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.3",
     "@types/react-router-dom": "^5.1.0",
+    "@types/react-test-renderer": "^16.9.1",
     "@types/socket.io-client": "^1.4.32",
+    "canvas-prebuilt": "^2.0.0-alpha.14",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-test-renderer": "^16.11.0",
     "react-toastify": "^5.4.0",
     "semantic-ui-react": "^0.88.1",
     "socket.io-client": "^2.3.0",
@@ -42,7 +45,13 @@
   "devDependencies": {
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "jest-canvas-mock": "^2.1.2",
     "ts-jest": "^24.1.0"
   },
-  "homepage" : "https://jylia.github.io/client_random_numbers_socket_io/"
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
+  "homepage": "https://jylia.github.io/client_random_numbers_socket_io/"
 }

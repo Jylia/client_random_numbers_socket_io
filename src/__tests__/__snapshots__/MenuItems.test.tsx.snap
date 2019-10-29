@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <a
+    className="active item"
+    onClick={[Function]}
+  >
+    Home
+  </a>,
+  <a
+    className="item"
+    onClick={[Function]}
+  >
+    Line Chart
+  </a>,
+  <a
+    className="item"
+    onClick={[Function]}
+  >
+    Bar Chart
+  </a>,
+  <a
+    className="item"
+    onClick={[Function]}
+  >
+    Threshold play
+  </a>,
+]
+`;

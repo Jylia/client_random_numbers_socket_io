@@ -5,7 +5,6 @@ import { MobileContext } from '../Layout/MobileContext';
 
 interface IHomePageProps {
     history: History;
-    isMobile: boolean;
 }
 
 interface IHomePageState {}

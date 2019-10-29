@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="ui inverted segment"
+>
+  <form
+    className="ui inverted form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="field"
+    >
+      <label>
+        Alert threshold
+      </label>
+      <input
+        onChange={[Function]}
+        placeholder="Please, enter a number"
+      />
+    </div>
+    <button
+      className="ui teal button"
+      onClick={[Function]}
+      type="submit"
+    >
+      Check random number
+    </button>
+  </form>
+  <div
+    className="Toastify"
+  />
+</div>
+`;

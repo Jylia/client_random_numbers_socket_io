@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div>
+    <div
+      className="ui inverted vertical center aligned segment"
+      style={
+        Object {
+          "minHeight": 700,
+          "padding": "1em 0em",
+        }
+      }
+    >
+      <div
+        className="ui large inverted pointing secondary menu"
+      >
+        <div
+          className="ui container"
+        >
+          <a
+            className="active item"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+          <a
+            className="item"
+            onClick={[Function]}
+          >
+            Line Chart
+          </a>
+          <a
+            className="item"
+            onClick={[Function]}
+          >
+            Bar Chart
+          </a>
+          <a
+            className="item"
+            onClick={[Function]}
+          >
+            Threshold play
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import MenuItems from '../Layout/MenuItems';
-import { MenuItemsEnum } from '../enums/MenuItems';
+import TresholdPage from '../Treshold/TresholdPage';
+import { history } from '../History';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<MenuItems activeItem={MenuItemsEnum.Home} setActiveItem={() => {}} />, div);
+  ReactDOM.render(<TresholdPage history={history} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('renders correctly', () => {
   const tree = renderer
-      .create(<MenuItems activeItem={MenuItemsEnum.Home} setActiveItem={() => {}} />)
+      .create(<TresholdPage history={history} />)
       .toJSON();
   expect(tree).toMatchSnapshot();
 });
